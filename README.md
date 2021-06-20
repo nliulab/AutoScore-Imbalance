@@ -6,10 +6,10 @@
 
 AutoScore-Imbalance, a novel framework to automate the development of a clinical scoring model for handling data imbalance in interpretable clinical score development. AutoScore consists of three modules: training dataset optimization, sample weight optimization, and adjusted AutoScore. The details are described in the manuscript (<http://XXX>). Users (clinicians or scientists) could seamlessly generate parsimonious sparse-score risk models (i.e., risk scores) in extremely imbalanced scenarios (e.g. rare diseases, adverse drug reaction), which can be easily implemented and validated in clinical practice. Compared with baseline models, this innovative AutoML framework presented a capability of developing good-performing and reliable, yet interpretable clinical scores on unbalanced datasets. We anticipate that this score generator will hold great potential in creating and evaluating interpretable clinical scores in a variety of settings.
 
-### Functions and pipeline
+### Functions and Modules
 
 The five pipeline function *AutoScore_rank()*, *AutoScore_parsimony()*, *AutoScore_weighting()*, *AutoScore_fine_tuning()* and
-*AutoScore_testing()* constitute the standard 5-step AutoScore-based Score generation process. This 5-step process is flexible for users to make some choices (e.g. determine the final list variable according to the parsimony plot, or fine-tune the cut-offs in variable transformation). Please follow the step-by-step instructions to build your own scores.
+*AutoScore_testing()* constitute the standard three modules: training dataset optimization, sample weight optimization, and adjusted AutoScore of AutoScore-Imbalance Score generation process. This 3-component process is flexible for users to make some choices (e.g. determine the approach for handling data imbalance, the final list variable according to the parsimony plot, or fine-tune the cut-offs in variable transformation). Please follow the step-by-step instructions to build your own scores.
 
 * STEP (1): *AutoScore_rank()* - Rank variables by machine learning (AutoScore Module 1)
 * STEP (2): *AutoScore_parsimony()* - Select the best model with parsimony plot (AutoScore Modules 2+3+4)
