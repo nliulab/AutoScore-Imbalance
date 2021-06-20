@@ -24,7 +24,7 @@ Xie F, Chakraborty B, Ong MEH, Goldstein BA, Liu N*. AutoScore: A machine learni
 DOI: 10.2196/21798 (https://preprints.jmir.org/preprint/21798)
 
 ### Contact
-- Han Yuan (Email: <xief@u.duke.nus.edu>)
+- Han Yuan (Email: <yuan.han@u.duke.nus.edu>)
 - Nan Liu (Email: <liu.nan@duke-nus.edu.sg>)
 
 # **AutoScore Demonstration**
