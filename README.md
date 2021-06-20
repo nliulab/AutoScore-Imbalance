@@ -1,6 +1,6 @@
 # AutoScore-Imbalance: An Automated Machine Learning Tool to Handle Data Imbalance in Interpretable Clinical Score Development
 
-- **AutoScore R package (version 0.1)**
+- **AutoScore-Imbalance R package (version 0.1)**
 
 ### Description
 
