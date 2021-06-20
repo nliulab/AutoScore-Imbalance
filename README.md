@@ -1,10 +1,10 @@
-# AutoScore: A Machine Learning-Based Automatic Clinical Score Generator
+# AutoScore-Imbalance: An Automated Machine Learning Tool to Handle Data Imbalance in Interpretable Clinical Score Development
 
 - **AutoScore R package (version 0.1)**
 
 ### Description
 
-AutoScore, a novel framework to automate the development of a clinical scoring model for predefined outcomes. AutoScore consists of six modules: variable ranking with machine learning, variable transformation, score derivation, model selection, domain knowledge-based score fine-tuning, and performance evaluation. The details are described in the manuscript (<http://dx.doi.org/10.2196/21798>). Users (clinicians or scientists) could seamlessly generate parsimonious sparse-score risk models (i.e., risk scores), which can be easily implemented and validated in clinical practice. Also, it enables users to build transparent and straightforward clinical scores quickly. We hope to see its application in various medical case studies.
+AutoScore-Imbalance, a novel framework to automate the development of a clinical scoring model for handling data imbalance in interpretable clinical score development. AutoScore consists of three modules: training dataset optimization, sample weight optimization, and adjusted AutoScore. The details are described in the manuscript (<http://XXX>). Users (clinicians or scientists) could seamlessly generate parsimonious sparse-score risk models (i.e., risk scores), which can be easily implemented and validated in clinical practice. Compared with baseline models, this innovative AutoML framework presented a capability of developing good-performing and reliable, yet interpretable clinical scores on unbalanced datasets. We anticipate that this score generator will hold great potential in creating and evaluating interpretable clinical scores in a variety of settings.
 
 ### Functions and pipeline
 
@@ -24,7 +24,7 @@ Xie F, Chakraborty B, Ong MEH, Goldstein BA, Liu N*. AutoScore: A machine learni
 DOI: 10.2196/21798 (https://preprints.jmir.org/preprint/21798)
 
 ### Contact
-- Feng Xie (Email: <xief@u.duke.nus.edu>)
+- Han Yuan (Email: <xief@u.duke.nus.edu>)
 - Nan Liu (Email: <liu.nan@duke-nus.edu.sg>)
 
 # **AutoScore Demonstration**
