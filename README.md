@@ -45,7 +45,7 @@ library(AutoScore)
 ```
 
 ### Load data (input data from csv or excel)
-- Users can use the integrated sample data in the package for demo
+- Input data
 ```r
 df_AutoScore_imbalance <- Sample_Data
 ```
