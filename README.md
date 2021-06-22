@@ -101,7 +101,7 @@ gan_samples <- gan_positive_generation(data_train = TrainSet, epoch = 300L, samp
 TrainSet_optimal <- Training_data_optimizing(data_train = TrainSet, data_validation = ValidationSet, method = "gan", var_num = 7, gan_positive_results = gan_samples)
 ```
 
-### STEP (2): Genrate variable ranking list (AutoScore Module 1)
+### STEP (2): Generate variable ranking list (AutoScore Module 1)
 - ntree: Number of trees in random forest algorithm, default: 100
 ```r
 Ranking <- AutoScore_rank(TrainSet_optimal$optimal_dataset)
