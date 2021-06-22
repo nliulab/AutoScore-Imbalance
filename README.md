@@ -64,7 +64,7 @@ df_AutoScore_imbalance <- Sample_Data
 
 ### Change "Y" (Dependent variable/Outcome) to "label" before running AutoScore
 ```r
-names(df_AutoScore_imbalance)[names(df_AutoScore_imbalance)=="Mortality_inpatient"]<-"label"
+names(df_AutoScore_imbalance)[names(df_AutoScore_imbalance)=="Mortality_inpatient"] <- "label"
 ```
 
 ### Data splitting (split dataset into Train/validation/test datasets (70/10/20 in percentage)；optional if users have predefined training/validation/test datasets)
