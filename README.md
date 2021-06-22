@@ -128,15 +128,13 @@ FinalVariable <- names(Ranking[1:predictor_var])
 - random_seed_out: Random seed in function, default: 1234
 ```r
 Score_adjusted_weight <- Sample_weights_optimizing(data_train = TrainSet_optimal$optimal_dataset, data_validation = ValidationSet, predictor = Ranking, predictor_num = predictor_var)
-# Users can modify score table based on their own domain knowledge
+# Users can modify score table with domain knowledge to update the scoring table (AutoScore Module 5)
 Score <- Score_adjusted_weight[[2]]
 Score$Age <- c(50,65,75)
 ```
 
 ### STEP (5): Evaluate the final score developed by AutoScore-Imbalance with ROC analysis (AutoScore Module 6) 
-- Revise "CutVec" with domain knowledge to update the scoring table (AutoScore Module 5)
-- Rerun AutoScore Modules 2+3
-- Users can choose any cut-off values and/or any number of categories, but are suggested to choose numbers close to the automatically determined values
+- Evaluate final score prediction performance
 ```r
 test_result <- AutoScore_testing(TestSet,Score_adjusted_weight[[1]], Score, Score_adjusted_weight[[3]])
 ```
