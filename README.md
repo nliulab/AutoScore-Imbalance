@@ -4,24 +4,21 @@
 
 ### Description
 
-AutoScore-Imbalance, a novel framework to automate the development of a clinical scoring model for handling data imbalance in interpretable clinical score development. AutoScore consists of three modules: training dataset optimization, sample weight optimization, and adjusted AutoScore. The details are described in the manuscript (<http://XXX>). Users (clinicians or scientists) could seamlessly generate parsimonious sparse-score risk models (i.e., risk scores) in extremely imbalanced scenarios (e.g. rare diseases, adverse drug reaction), which can be easily implemented and validated in clinical practice. Compared with baseline models, this innovative AutoML framework presented a capability of developing good-performing and reliable, yet interpretable clinical scores on unbalanced datasets. We anticipate that this score generator will hold great potential in creating and evaluating interpretable clinical scores in a variety of settings.
+AutoScore-Imbalance, an extended AutoML framework to AutoScore (<https://github.com/nliulab/AutoScore>) for handling data imbalance in interpretable clinical score development. AutoScore-Imbalance consists of three modules: training dataset optimization, sample weight optimization, and adjusted AutoScore. The details are described in the manuscript (<http://XXX>). Users (clinicians or scientists) could seamlessly generate parsimonious sparse-score risk models (i.e., risk scores) in extremely unbalanced scenarios (e.g. rare diseases, adverse drug reaction). Compared with baseline models, this innovative framework presented a capability of developing good-performing and reliable, yet interpretable clinical scores on unbalanced datasets. We anticipate that this score generator will hold great potential in creating and evaluating interpretable clinical scores in a variety of settings.
 
 ### Functions and Modules
 
-The five pipeline function *AutoScore_rank()*, *AutoScore_parsimony()*, *AutoScore_weighting()*, *AutoScore_fine_tuning()* and
-*AutoScore_testing()* constitute the standard three modules: training dataset optimization, sample weight optimization, and adjusted AutoScore of AutoScore-Imbalance Score generation process. This 3-component process is flexible for users to make some choices (e.g. determine the approach for handling data imbalance, the final list variable according to the parsimony plot, or fine-tune the cut-offs in variable transformation). Please follow the step-by-step instructions to build your own scores.
+The two unique pipeline function *Training_data_optimizing()* and *Sample_weights_optimizing()* constitute the standard three blocks in AutoScore-Imbalacne: training dataset optimization and sample weight optimization, and adjusted AutoScore. This 3-component process is flexible for users to make some choices (e.g. determine the approach for handling data imbalance, the final list variable according to the parsimony plot, or fine-tune the cut-offs in variable transformation). Please follow the step-by-step instructions to build your own scores.
 
-* STEP (1): *AutoScore_rank()* - Rank variables by machine learning (AutoScore Module 1)
-* STEP (2): *AutoScore_parsimony()* - Select the best model with parsimony plot (AutoScore Modules 2+3+4)
-* STEP (3): *AutoScore_weighting()* - Generate initial score with the final list of variables (Re-run AutoScore Modules 2+3)
-* STEP (4): *AutoScore_fine_tuning()* - Fine-tune the score by revising "CutVec" with domain knowledge (AutoScore Module 5)
-* STEP (5): *AutoScore_testing()* - Evaluate the final score with ROC analysis (AutoScore Module 6)
-
-We also several functions in the package, which are optional. They include *Preprocess()* for preprocessing dataset, *Descriptive* for generating the descriptive table (table one) of your dataset, *UniVariable* for creating the table of univariable analysis for your dataset, *MultiVariable* for generating the table of multivariable analysis for your dataset. These functions are handy in building predictive models, especially for preparing clinical manuscripts.
+* STEP (1): *Training_data_optimizing()* - , Manipulate the data to produce a reasonably balanced dataset using the unbalanced training dataset as input (AutoScore-Imbalance Block A) 
+* STEP (2): *AutoScore_rank()* - Rank variables by machine learning (AutoScore Module 1)
+* STEP (3): *AutoScore_parsimony()* - Select the best model with parsimony plot (AutoScore Modules 2+3+4)
+* STEP (4): *Sample_weights_optimizing()* - Derive optimal sample weights for the majority and minority samples generated from Step (1) and output the final score table (AutoScore-Imbalance Block B and C) 
+* STEP (5): *AutoScore_testing()* - Evaluate the final score developed by AutoScore-Imbalance with ROC analysis (AutoScore Module 6)
 
 ### Please cite as:
-Xie F, Chakraborty B, Ong MEH, Goldstein BA, Liu N*. AutoScore: A machine learning-based automatic clinical score generator and its application to mortality prediction using electronic health records. JMIR Medical Informatics 2020:21798 (forthcoming/in press)
-DOI: 10.2196/21798 (https://preprints.jmir.org/preprint/21798)
+XXX
+DOI: XXX (https://XXX)
 
 ### Contact
 - Han Yuan (Email: <yuan.han@u.duke.nus.edu>)
@@ -33,49 +30,46 @@ DOI: 10.2196/21798 (https://preprints.jmir.org/preprint/21798)
 ### Install the development version from GitHub:
 
 ```r
-# install.packages("devtools")
-library(devtools)
-install_github(repo = "nliulab/AutoScore")
+# Download AutoScore-Imbalance R file and load functions
+source('AutoScore-Imbalance.R')
 ```
-[devtools]: https://github.com/hadley/devtools
 
 ### Load R packages (including AutoScore package)
 ```r
-library(AutoScore)
-library(caret)
 library(pROC)
-library(randomForest)
-library(ggplot2)
+library(reticulate)
+library(rpart)
+library(DMwR)
+library(mltools)
+library(AutoScore)
 ```
 
 ### Load data (input data from csv or excel)
 - Users can use the integrated sample data in the package for demo
 ```r
-df_AutoScore <- Sample_Data
+df_AutoScore_imbalance <- Sample_Data
 ```
 
 ### Data preprocessing
-- Users are suggested to preprocess their data (missing values, outliers, etc) to ensure that data are in good quality before running the AutoScore Pipeline
-- "Preprocess" built-in function may help with missing value imputation
+- Users are suggested to preprocess their data (missing values, outliers, etc) to ensure that data are in good quality before running the AutoScore-Imbalance and AutoScore Pipeline
 
 ### Prepare TrainSet, ValidationSet, and Testset
 - Option 1: Prepare three separate datasets to train, validate, and test models
-- Option 2: Use demo codes below to split their dataset into Train/validation/test datasets (70/10/20 in percentage)
+- Option 2: Use demo codes below to split their dataset into Train/validation/test datasets (60/20/20 in percentage)
 
 ### Other requirements for input data
-- Independent variables (X) can be numeric (class: num/int) or categorical (class: factor/logic)
-- Categories/levels for each factor should be less than 10
+- Independent variables (X) should be numeric (class: num/int)
 - Variables of character class (in R environment) are not supported. Please convert them into categorical variables first before running AutoScore
-- Dependent variable (Y) should be binary, and its name should be changed to "label" (Can use codes below to do it.)
+- Dependent variable (Y) should be binary, its name should be changed to "label", and set the minority class label as "1" and the majority class label as "0"
 
 ### Change "Y" (Dependent variable/Outcome) to "label" before running AutoScore
 ```r
-names(df_AutoScore)[names(df_AutoScore)=="Mortality_inpatient"]<-"label"
+names(df_AutoScore_imbalance)[names(df_AutoScore_imbalance)=="Mortality_inpatient"] <- "label"
 ```
 
 ### Data splitting (split dataset into Train/validation/test datasets (70/10/20 in percentage)；optional if users have predefined training/validation/test datasets)
 ```r
-Out_split <- split_data(data = df_AutoScore, ratio = c(7, 1, 2))
+Out_split <- split_data(data = df_AutoScore_imbalance, ratio = c(6, 2, 2))
 TrainSet <- Out_split$TrainSet
 ValidationSet <- Out_split$ValidationSet
 TestSet <- Out_split$TestSet
@@ -88,71 +82,61 @@ head(ValidationSet)
 head(TestSet)
 ```
 
-## **2. Run AutoScore to build clinical scores: 5-step process**
+## **2. Run AutoScore-Imbalance to build clinical scores in imbalanced datasets: 5-step process**
 
-### STEP (1): Genrate variable ranking list (AutoScore Module 1)
-- ntree: Number of trees in random forest algorithm, default: 100
+### STEP (1): Manipulate the data to produce a reasonably balanced dataset using the unbalanced training dataset as input (AutoScore-Imbalance Block A) 
+- method: Method for training data optimization, including "SMOTE", "upsampling", "downsampling", "up_and_down_sampling", "smote_and_down_sampling", "gan", and "gan_and_downsampling"
+- var_num: Variable quantity of score systems is used as a hyperparameter in Block A and Block B for intermediate evaluations; As with random forest, we set this hyperparameter as the square root (or 1/3) of the total number of variables
+- gan_positive_results: Positive samples generated by GAN
 ```r
-Ranking <- AutoScore_rank(TrainSet, ntree=100)
+TrainSet_optimal <- Training_data_optimizing(data_train = TrainSet, data_validation = ValidationSet, "SMOTE", 7)
 ```
 
-### STEP (2): Select the best model with parsimony plot (AutoScore Modules 2+3+4)
+- epoch: GAN training epoch in Python
+- sample_num: Samples number generated by GAN
+```r
+# GAN method (and GAN and Downsampling) relies on Python module, which should be specified
+gan_preparation("D:/Anaconda/python.exe")
+gan_samples <- gan_positive_generation(data_train = TrainSet, epoch = 300L, sample_num = 50000L)
+TrainSet_optimal <- Training_data_optimizing(data_train = TrainSet, data_validation = ValidationSet, method = "gan", var_num = 7, gan_positive_results = gan_samples)
+```
+
+### STEP (2): Generate variable ranking list (AutoScore Module 1)
+- ntree: Number of trees in random forest algorithm, default: 100
+```r
+Ranking <- AutoScore_rank(TrainSet_optimal$optimal_dataset)
+```
+
+### STEP (3): Select the best model with parsimony plot (AutoScore Modules 2+3+4)
 - nmin: Minimum number of selected variables, default: 1
 - nmax: Maximum number of selected variables, default: 20
 - probs: Predefine quantiles to convert continuous variables to categorical, default:(0, 0.05, 0.2, 0.8, 0.95, 1)
 ```r
-AUC <- AutoScore_parsimony(TrainSet, ValidationSet, rank=Ranking, nmin=1, nmax=20, probs=c(0, 0.05, 0.2, 0.8, 0.95, 1))
+AUC <- AutoScore_parsimony(TrainSet_optimal$optimal_dataset, ValidationSet, rank=Ranking, nmin=1, nmax=20, probs=c(0, 0.05, 0.2, 0.8, 0.95, 1))
 ```
 
-**Determine the final list of variables "num_var" for creating the risk score, based on the parsimony plot in STEP (2)**
+**Determine the final list of variables "num_var" for creating the risk score, based on the parsimony plot in STEP (3)**
 ```r
-num_var <- 6
-FinalVariable <- names(Ranking[1:num_var])
+predictor_var <- 6
+FinalVariable <- names(Ranking[1:predictor_var])
 ```
 
-### STEP (3): Generate the initial score with the final list of variables (Re-run AutoScore Modules 2+3)
-- MaxScore: Predefined cap of of the risk score (e.g. <=100)
+### STEP (4): Derive optimal sample weights for the majority and minority samples generated from Step (1) and output the final score table (AutoScore-Imbalance Block B and C) 
+- predictor: Ranked variables sequence from STEP (2)
+- predictor_num: Variable quantity in final score from STEP (3)
+- steps: Step between 1 to (number of majority samples / number of minority samples), default: 1
+- random_seed_out: Random seed in function, default: 1234
 ```r
-CutVec <- AutoScore_weighting(TrainSet, ValidationSet, FinalVariable, MaxScore=100, probs=c(0, 0.05, 0.2, 0.8, 0.95, 1))
+Score_adjusted_weight <- Sample_weights_optimizing(data_train = TrainSet_optimal$optimal_dataset, data_validation = ValidationSet, predictor = Ranking, predictor_num = predictor_var)
+# Users can modify score table based on their own domain knowledge
+Score <- Score_adjusted_weight[[2]]
+Score$Age <- c(50,65,75)
 ```
 
-### STEP (4): Fine-tune the initial score generated in STEP-3 (AutoScore Module 5 & Re-run AutoScore Modules 2+3) 
+### STEP (5): Evaluate the final score developed by AutoScore-Imbalance with ROC analysis (AutoScore Module 6) 
 - Revise "CutVec" with domain knowledge to update the scoring table (AutoScore Module 5)
 - Rerun AutoScore Modules 2+3
 - Users can choose any cut-off values and/or any number of categories, but are suggested to choose numbers close to the automatically determined values
 ```r
-CutVec$tempc_mean <- c(36, 36.5, 37.3, 38)
-CutVec$platelet_min <- c(60, 120, 280, 400)
-CutVec$lactate_max <- c(1, 1.7, 2.8, 5.7)
-CutVec$resprate_mean <- c(13, 16, 21, 26)
-CutVec$spo2_mean <- c(95, 99)
-ScoringTable <- AutoScore_fine_tuning(TrainSet, ValidationSet, FinalVariable, CutVec, MaxScore=100)
+test_result <- AutoScore_testing(TestSet,Score_adjusted_weight[[1]], Score, Score_adjusted_weight[[3]])
 ```
-
-### STEP (5): Evalute the final risk score (AutoScore Module 6)
-```r
-AutoScore_testing(TestSet, FinalVariable, CutVec, ScoringTable)
-```
-
-## **3. Demo on several related functions**
-
-Preprocessing
-```r
-# df_AutoScore <- Preprocess(Sample_Data, outcome="Mortality_inpatient")
-```
-
-Descriptive analysis and result table generation
-```r
-Descriptive(df_AutoScore)
-```
-
-Univariable analysis and result table generation
-```r
-UniTable <- UniVariable(df_AutoScore)
-```
-
-Multivariable analysis and result table generation
-```r
-MultiTable <- MultiVariable(df_AutoScore)
-```
-
