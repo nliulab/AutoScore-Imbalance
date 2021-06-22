@@ -47,7 +47,7 @@ library(AutoScore)
 ### Load data (input data from csv or excel)
 - Input data
 ```r
-df_AutoScore_imbalance <- Sample_Data
+df_AutoScore_imbalance <- read.csv("Sample_Data.csv")
 ```
 
 ### Data preprocessing
