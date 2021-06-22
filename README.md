@@ -13,7 +13,7 @@ The two unique pipeline function *Training_data_optimizing()* and *Sample_weight
 * STEP (1): *Training_data_optimizing()* - , Manipulate the data to produce a reasonably balanced dataset using the unbalanced training dataset as input (AutoScore-Imbalance Block A) 
 * STEP (2): *AutoScore_rank()* - Rank variables by machine learning (AutoScore Module 1)
 * STEP (3): *AutoScore_parsimony()* - Select the best model with parsimony plot (AutoScore Modules 2+3+4)
-* STEP (4): *Sample_weights_optimizing()* - Derive optimal sample weights for the majority and minority samples generated from Step (1) (AutoScore-Imbalance Block B and C) 
+* STEP (4): *Sample_weights_optimizing()* - Derive optimal sample weights for the majority and minority samples generated from Step (1) and output the final score table (AutoScore-Imbalance Block B and C) 
 * STEP (5): *AutoScore_testing()* - Evaluate the final score developed by AutoScore-Imbalance with ROC analysis (AutoScore Module 6)
 
 ### Please cite as:
@@ -121,7 +121,7 @@ predictor_var <- 6
 FinalVariable <- names(Ranking[1:predictor_var])
 ```
 
-### STEP (4): Derive optimal sample weights for the majority and minority samples generated from Step (1) (AutoScore-Imbalance Block B and C) 
+### STEP (4): Derive optimal sample weights for the majority and minority samples generated from Step (1) and output the final score table (AutoScore-Imbalance Block B and C) 
 - predictor: Ranked variables sequence from STEP (2)
 - predictor_num: Variable quantity in final score from STEP (3)
 - steps: Step between 1 to (number of majority samples / number of minority samples), default: 1
