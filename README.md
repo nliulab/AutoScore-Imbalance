@@ -128,7 +128,7 @@ AUC <- AutoScore_parsimony(TrainSet_optimal$optimal_dataset, ValidationSet, rank
 predictor_var <- 6
 FinalVariable <- names(Ranking[1:predictor_var])
 ```
-We manually selected the “near-optimal” number of variables to ensure that the performance could not be significantly improved by including additional variables in the models. For example, in Figure 2, we select 5 variables for final score development
+We manually selected the “near-optimal” number of variables to ensure that the performance could not be significantly improved by including additional variables in the models. For example, in Figure 2, we select 5 variables for final score development.
 ![parsimony](https://github.com/nliulab/AutoScore-Imbalance/blob/main/Figure%20file/parsimony%20plot.png)
 
 Figure 2: Parsimony plots of the original AutoScore-Imbalance sub-model (downsampling)
