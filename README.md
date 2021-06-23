@@ -8,6 +8,12 @@ AutoScore-Imbalance, an extended AutoML framework to AutoScore (<https://github.
 
 Compared with baseline models, this innovative framework presented a capability of developing good-performing and reliable, yet interpretable clinical scores on unbalanced datasets. We anticipate that this score generator will hold great potential in creating and evaluating interpretable clinical scores in a variety of settings.
 
+The AutoScore-Imbalance framework is illustrated in Figure 1. By using resampling and data generation techniques, Block A adjusts the raw unbalanced training dataset. Block B is designed to optimize sample (observation) weights, which are adjusted to correct any imperfections that may lead to bias in the class proportion. Block C adapts the original AutoScore workflow to derive risk scores using the relatively balanced datasets obtained in Block A and the sample weights acquired from Block B. 
+
+![flow](https://github.com/nliulab/AutoScore-Imbalance/blob/main/Figure%20file/flow%20plot.png)
+
+Figure 1. Flowchart of the AutoScore-Imbalance framework
+
 ### Functions and Modules
 
 The two unique pipeline function *Training_data_optimizing()* and *Sample_weights_optimizing()* constitute the standard three blocks in AutoScore-Imbalacne: training dataset optimization and sample weight optimization, and adjusted AutoScore. This 3-component process is flexible for users to make some choices (e.g. determine the approach for handling data imbalance, the final list variable according to the parsimony plot, or fine-tune the cut-offs in variable transformation). Please follow the step-by-step instructions to build your own scores.
@@ -122,6 +128,10 @@ AUC <- AutoScore_parsimony(TrainSet_optimal$optimal_dataset, ValidationSet, rank
 predictor_var <- 6
 FinalVariable <- names(Ranking[1:predictor_var])
 ```
+We manually selected the “near-optimal” number of variables to ensure that the performance could not be significantly improved by including additional variables in the models. For example, in Figure 2, we select 5 variables for final score development
+![parsimony](https://github.com/nliulab/AutoScore-Imbalance/blob/main/Figure%20file/parsimony%20plot.png)
+
+Figure 2: Parsimony plots of the original AutoScore-Imbalance sub-model (downsampling)
 
 ### STEP (4): Derive optimal sample weights for the majority and minority samples generated from Step (1) and output the final score table (AutoScore-Imbalance Block B and C) 
 - predictor: Ranked variables sequence from STEP (2)
