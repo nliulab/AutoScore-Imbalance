@@ -8,7 +8,7 @@ AutoScore-Imbalance, an extended AutoML framework to AutoScore (<https://github.
 
 Compared with baseline models, this innovative framework presented a capability of developing good-performing and reliable, yet interpretable clinical scores on unbalanced datasets. We anticipate that this score generator will hold great potential in creating and evaluating interpretable clinical scores in a variety of settings.
 
-The AutoScore-Imbalance framework is illustrated in Figure 1. By using resampling and data generation techniques, Block A adjusts the raw unbalanced training dataset. Block B is designed to optimize sample (observation) weights, which are adjusted to correct any imperfections that may lead to bias in the class proportion. Block C adapts the original AutoScore workflow to derive risk scores using the relatively balanced datasets obtained in Block A and the sample weights acquired from Block B. 
+The AutoScore-Imbalance framework is illustrated in Figure 1. By using resampling and data generation techniques, Block A adjusts the raw unbalanced training dataset. Block B is designed to optimize sample (observation) weights, which are adjusted to correct any imperfections that may lead to bias in the class proportion. Block C adapts the original AutoScore workflow to derive risk scores using the relatively balanced datasets obtained in Block A and the sample weights acquired from Block B.  
 
 ![flow](https://github.com/nliulab/AutoScore-Imbalance/blob/main/Figure%20file/flow%20plot.png)
 
