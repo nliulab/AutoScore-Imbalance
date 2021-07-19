@@ -25,8 +25,7 @@ The two unique pipeline function *Training_data_optimizing()* and *Sample_weight
 * STEP (5): *AutoScore_testing()* - Evaluate the final score developed by AutoScore-Imbalance with ROC analysis (AutoScore Module 6)
 
 ### Please cite as:
-XXX
-DOI: XXX (https://XXX)
+Yuan, H., Xie, F., Ong, M. E. H., Ning, Y., Chee, M. L., Saffari, S. E., ... & Liu, N. (2021). AutoScore-Imbalance: An interpretable machine learning tool for development of clinical scores with rare events data. arXiv preprint arXiv:2107.06039. (https://arxiv.org/abs/2107.06039)
 
 ### Contact
 - Han Yuan (Email: <yuan.han@u.duke.nus.edu>)
